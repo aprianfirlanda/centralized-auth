@@ -11,7 +11,7 @@ kubectl create ns apisix
 apply etcd
 
 ```shell
-kubectl -n apisix apply -f etcd.yaml
+kubectl -n apisix apply -f apisix/etcd.yaml
 ```
 
 check health etcd
@@ -23,13 +23,13 @@ kubectl -n apisix exec -it etcd-0 -- etcdctl endpoint health
 apply config
 
 ```shell
-kubectl -n apisix apply -f config.yaml
+kubectl -n apisix apply -f apisix/config.yaml
 ```
 
 apply apisix deployment
 
 ```shell
-kubectl -n apisix apply -f apisix-deployment.yaml
+kubectl -n apisix apply -f apisix/apisix-deployment.yaml
 ```
 
 check readiness apisix deployment
@@ -89,16 +89,22 @@ kubectl -n apisix create serviceaccount apisix-ingress-controller # create servi
 kubectl create clusterrolebinding apisix-viewer --clusterrole=apisix-view-clusterrole --serviceaccount=apisix:apisix-ingress-controller
 ```
 
+install crd
+
+```shell
+kubectl apply -k samples/deploy/crd
+```
+
 apply apisix config
 
 ```shell
-kubectl -n apisix apply -f apisix-config.yaml
+kubectl -n apisix apply -f apisix/apisix-config.yaml
 ```
 
 apply ingress service
 
 ```shell
-kubectl -n apisix apply -f ingress-service.yaml
+kubectl -n apisix apply -f apisix/ingress-service.yaml
 ```
 
 remove existing route created before for httpbin
@@ -109,13 +115,13 @@ kubectl -n apisix exec -it $(kubectl get pods -n apisix -l app.kubernetes.io/nam
 apply ingress deployment
 
 ```shell
-kubectl -n apisix apply -f ingress-deployment.yaml
+kubectl -n apisix apply -f apisix/ingress-deployment.yaml
 ```
 
 apply apisixroute http bin
 
 ```shell
-kubectl -n demo apply -f httpbin-route.yaml
+kubectl -n demo apply -f demo/httpbin-route.yaml
 ```
 
 test apisixroute
