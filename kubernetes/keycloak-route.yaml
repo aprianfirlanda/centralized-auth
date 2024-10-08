@@ -1,0 +1,30 @@
+apiVersion: apisix.apache.org/v2
+kind: ApisixRoute
+metadata:
+  name: keycloak
+  namespace: centralized-auth
+spec:
+  http:
+    - name: keycloak-http
+      match:
+        hosts:
+          - "192.168.100.105"
+        paths:
+          - "/keycloak/*"
+      backends:
+        - serviceName: keycloak
+          servicePort: 8080
+      plugins:
+        - name: proxy-rewrite
+          config:
+            regex_uri: ["^/keycloak/(.*)", "/$1"]
+#        - name: jwt-auth
+#          enable: true
+#          config:
+#            public_key: |
+#              -----BEGIN PUBLIC KEY-----
+#              ...
+#              -----END PUBLIC KEY-----
+#            algorithm: RS256
+#            header:
+#              "X-User-Name": "$username"

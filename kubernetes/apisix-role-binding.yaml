@@ -1,0 +1,24 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: ingress-apisix
+  name: apisix-ingress-controller
+rules:
+  - apiGroups: ["apisix.apache.org"] # Adjust as necessary for your version
+    resources: ["plugins", "routes"]
+    verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: apisix-ingress-controller-binding
+  namespace: ingress-apisix
+subjects:
+  - kind: ServiceAccount
+    name: apisix-ingress-controller
+    namespace: ingress-apisix
+roleRef:
+  kind: Role
+  name: apisix-ingress-controller
+  apiGroup: rbac.authorization.k8s.io
