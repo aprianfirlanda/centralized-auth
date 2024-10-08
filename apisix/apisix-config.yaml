@@ -1,0 +1,25 @@
+apiVersion: v1
+data:
+  config.yaml: |
+    # log options
+    log_level: "debug"
+    log_output: "stderr"
+    http_listen: ":8080"
+    enable_profiling: true
+    kubernetes:
+      kubeconfig: ""
+      resync_interval: "30s"
+      namespace_selector:
+      - ""
+      ingress_class: "apisix"
+      ingress_version: "networking/v1"
+      apisix_route_version: "apisix.apache.org/v2"
+    apisix:
+      default_cluster_base_url: "http://apisix-admin.apisix:9180/apisix/admin"
+      default_cluster_admin_key: "edd1c9f034335f136f87ad84b625c8f1"
+kind: ConfigMap
+metadata:
+  name: apisix-ingress-conf
+  namespace: apisix
+  labels:
+    app.kubernetes.io/name: ingress-controller

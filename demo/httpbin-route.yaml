@@ -1,0 +1,16 @@
+apiVersion: apisix.apache.org/v2
+kind: ApisixRoute
+metadata:
+  name: httpserver-route
+  namespace: demo
+spec:
+  http:
+    - name: httpbin
+      match:
+        hosts:
+          - local.httpbin.org
+        paths:
+          - /*
+      backends:
+        - serviceName: httpbin
+          servicePort: 80
