@@ -1,0 +1,24 @@
+### User Register
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+  "username": "aprianfirlanda",
+  "password": "supersecret",
+  "email": "aprianfirlanda@gmail.com"
+}
+
+### Get User Info Success
+GET http://localhost:3000/users/me
+X-User-Name: aprianfirlanda
+
+### Get User Info Failed
+GET http://localhost:3000/users/me
+
+### Delete User Success
+DELETE http://localhost:3000/users/me
+X-User-Name: aprianfirlanda
+
+### Delete User Failed
+DELETE http://localhost:3000/users/me
+X-User-Name: aprianfirlanda
