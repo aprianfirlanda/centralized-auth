@@ -8,10 +8,9 @@ const init = async () => {
         host: 'localhost'
     });
 
-    // User Registration
     server.route({
         method: 'POST',
-        path: '/register',
+        path: '/public-api/register',
         handler: (request, h) => {
             const { username, password, email } = request.payload;
 
@@ -27,7 +26,7 @@ const init = async () => {
 
     server.route({
         method: 'GET',
-        path: '/users/me',
+        path: '/api/users/me',
         handler: (request, h) => {
             const userName = request.headers['x-user-name'];
 
@@ -46,7 +45,7 @@ const init = async () => {
     // Delete Current User Account (protected route)
     server.route({
         method: 'DELETE',
-        path: '/users/me',
+        path: '/api/users/me',
         handler: (request, h) => {
             const userName = request.headers['x-user-name'];
 
