@@ -1,4 +1,4 @@
-FROM golang:1.20.2 AS builder
+FROM golang:1.23.2 AS builder
 LABEL authors="Aprian Firlanda Imani"
 
 WORKDIR /app
