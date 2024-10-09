@@ -21,4 +21,3 @@ X-User-Name: aprianfirlanda
 
 ### Delete User Failed
 DELETE http://localhost:3000/users/me
-X-User-Name: aprianfirlanda
