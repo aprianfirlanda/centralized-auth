@@ -1,0 +1,9 @@
+### Get Payment Info
+GET http://localhost:3000/api-public/payment/status/123456789
+
+### History Payment Success
+GET http://localhost:3000/api/users/payments
+X-User-Name: aprianfirlanda
+
+### History Payment Failed
+GET http://localhost:3000/api/users/payments
