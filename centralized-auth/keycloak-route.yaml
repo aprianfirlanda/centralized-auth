@@ -16,6 +16,7 @@ spec:
           servicePort: 8080
       plugins:
         - name: proxy-rewrite
+          enable: true
           config:
             regex_uri: ["^/keycloak/(.*)", "/$1"]
 #        - name: jwt-auth
