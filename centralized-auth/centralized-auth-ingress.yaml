@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: virlandd.dev
+    - host: centralized-auth.local
       http:
         paths:
           - path: /
