@@ -8,7 +8,7 @@ spec:
     - name: keycloak-http
       match:
         hosts:
-          - "192.168.100.105"
+          - virlandd.dev
         paths:
           - "/keycloak/*"
       backends:
