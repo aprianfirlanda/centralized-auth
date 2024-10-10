@@ -128,3 +128,9 @@ test apisixroute
 ```shell
 kubectl -n apisix exec -it $(kubectl get pods -n apisix -l app.kubernetes.io/name=apisix -o name) -- curl "http://127.0.0.1:9080/get" -H "Host: local.httpbin.org"
 ```
+
+apply apisix-gateway service
+
+```shell
+kubectl -n apisix apply -f apisix/apisix-gateway-service.yaml
+```
