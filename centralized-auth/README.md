@@ -3,14 +3,19 @@ apply create namespace centralized auth
 kubectl apply -f centralized-auth/centralized-auth-namespace.yaml
 ```
 
+apply create ingress for host centralized-auth.local to apisix
+```shell
+kubectl apply -f centralized-auth/centralized-auth-ingress.yaml
+```
+
 apply create deployment keycloak
 ```shell
-kubectl apply -f centralized-auth/keycloak-deployment.yaml
+kubectl apply -f centralized-auth/keycloak/keycloak-deployment.yaml
 ```
 
 apply create service keycloak
 ```shell
-kubectl apply -f centralized-auth/keycloak-service.yaml
+kubectl apply -f centralized-auth/keycloak/keycloak-service.yaml
 ```
 
 check keycloak from apisix container
@@ -20,7 +25,7 @@ kubectl -n apisix exec -it $(kubectl get pods -n apisix -l app.kubernetes.io/nam
 
 add route for keycloak on apisix
 ```shell
-kubectl apply -f centralized-auth/keycloak-route.yaml
+kubectl apply -f centralized-auth/keycloak/keycloak-route.yaml
 ```
 
 check route keycloak from apisix gateway
