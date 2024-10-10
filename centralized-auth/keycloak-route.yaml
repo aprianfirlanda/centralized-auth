@@ -14,11 +14,11 @@ spec:
       backends:
         - serviceName: keycloak
           servicePort: 8080
-      plugins:
-        - name: proxy-rewrite
-          enable: true
-          config:
-            regex_uri: ["^/keycloak/(.*)", "/$1"]
+#      plugins:
+#        - name: proxy-rewrite
+#          enable: true
+#          config:
+#            regex_uri: ["^/keycloak/(.*)", "/$1"]
 #        - name: jwt-auth
 #          enable: true
 #          config:
