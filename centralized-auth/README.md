@@ -8,6 +8,8 @@ apply create ingress for host centralized-auth.local to apisix
 kubectl apply -f centralized-auth/centralized-auth-ingress.yaml
 ```
 
+## create keycloak
+
 apply create deployment keycloak
 ```shell
 kubectl apply -f centralized-auth/keycloak/keycloak-deployment.yaml
@@ -20,7 +22,7 @@ kubectl apply -f centralized-auth/keycloak/keycloak-service.yaml
 
 check keycloak from apisix container
 ```shell
-kubectl -n apisix exec -it $(kubectl get pods -n apisix -l app.kubernetes.io/name=apisix -o name) -- curl http://keyclaok.centralized-auth:8080/realms/master
+kubectl -n apisix exec -it $(kubectl get pods -n apisix -l app.kubernetes.io/name=apisix -o name) -- curl http://keycloak.centralized-auth:8080/keycloak/realms/master
 ```
 
 add route for keycloak on apisix
@@ -31,4 +33,32 @@ kubectl apply -f centralized-auth/keycloak/keycloak-route.yaml
 check route keycloak from apisix gateway
 ```shell
 kubectl -n apisix exec -it $(kubectl get pods -n apisix -l app.kubernetes.io/name=apisix -o name) -- curl http://127.0.0.1:9080/keycloak/realms/master -H "Host: 192.168.100.105"
+```
+
+
+## create user server
+
+apply create deployment user server
+```shell
+kubectl apply -f centralized-auth/user-server/user-server-deployment.yaml
+```
+
+apply create service user server
+```shell
+kubectl apply -f centralized-auth/user-server/user-server-service.yaml
+```
+
+check user server from apisix container
+```shell
+kubectl -n apisix exec -it $(kubectl get pods -n apisix -l app.kubernetes.io/name=apisix -o name) -- curl http://user-server.centralized-auth:3000/api/users/me
+```
+
+add route for user server on apisix
+```shell
+kubectl apply -f centralized-auth/user-server/user-server-route.yaml
+```
+
+check route user server from apisix gateway
+```
+kubectl -n apisix exec -it $(kubectl get pods -n apisix -l app.kubernetes.io/name=apisix -o name) -- curl http://127.0.0.1:9080/user-server/api/users/me -H "Host: centralized-auth.local"
 ```

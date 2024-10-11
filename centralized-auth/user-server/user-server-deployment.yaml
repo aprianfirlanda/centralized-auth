@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-server
+  namespace: centralized-auth
+  labels:
+    app: user-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-server
+  template:
+    metadata:
+      name: user-server
+      labels:
+        app: user-server
+    spec:
+      containers:
+        - name: user-server
+          image: aprianfirlanda/user-service:v1.0.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+      restartPolicy: Always
+      

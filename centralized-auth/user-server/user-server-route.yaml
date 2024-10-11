@@ -1,0 +1,31 @@
+apiVersion: apisix.apache.org/v2
+kind: ApisixRoute
+metadata:
+  name: user-server
+  namespace: centralized-auth
+spec:
+  http:
+    - name: user-server-http
+      match:
+        hosts:
+          - centralized-auth.local
+        paths:
+          - "/user-server/*"
+      backends:
+        - serviceName: user-server
+          servicePort: 3000
+      plugins:
+        - name: proxy-rewrite
+          enable: true
+          config:
+            regex_uri: ["^/user-server/(.*)", "/$1"]
+#        - name: jwt-auth
+#          enable: true
+#          config:
+#            public_key: |
+#              -----BEGIN PUBLIC KEY-----
+#              ...
+#              -----END PUBLIC KEY-----
+#            algorithm: RS256
+#            header:
+#              "X-User-Name": "$username"
