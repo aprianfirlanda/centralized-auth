@@ -38,7 +38,7 @@ kubectl apply -f keycloak/keycloak-route.yaml
 
 check route keycloak from apisix gateway
 ```shell
-kubectl -n apisix exec -it $(kubectl get pods -n apisix -l app.kubernetes.io/name=apisix -o name) -- curl http://127.0.0.1:9080/keycloak/realms/master -H "Host: 192.168.100.105"
+kubectl -n apisix exec -it $(kubectl get pods -n apisix -l app.kubernetes.io/name=apisix -o name) -- curl http://127.0.0.1:9080/keycloak/realms/master -H "Host: centralized-auth.local"
 ```
 
 
@@ -65,7 +65,7 @@ kubectl apply -f user-server/user-server-route.yaml
 ```
 
 check route user server from apisix gateway
-```
+```shell
 kubectl -n apisix exec -it $(kubectl get pods -n apisix -l app.kubernetes.io/name=apisix -o name) -- curl http://127.0.0.1:9080/user-server/api/users/me -H "Host: centralized-auth.local"
 ```
 
@@ -94,6 +94,6 @@ kubectl apply -f payment-server/payment-server-route.yaml
 ```
 
 check route payment server from apisix gateway
-```
+```shell
 kubectl -n apisix exec -it $(kubectl get pods -n apisix -l app.kubernetes.io/name=apisix -o name) -- curl http://127.0.0.1:9080/payment-server/api/users/payments -H "Host: centralized-auth.local"
 ```
