@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-server
+  namespace: centralized-auth
+  labels:
+    app: payment-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payment-server
+  template:
+    metadata:
+      name: payment-server
+      labels:
+        app: payment-server
+    spec:
+      containers:
+        - name: payment-server
+          image: aprianfirlanda/payment-service:v1.0.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+      restartPolicy: Always
+      

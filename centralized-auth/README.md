@@ -1,23 +1,29 @@
+Centralized Authentication
+
+use APISIX and keycloak for centralized authentication. 
+
+## Required
+
 apply create namespace centralized auth
 ```shell
-kubectl apply -f centralized-auth/centralized-auth-namespace.yaml
+kubectl apply -f centralized-auth-namespace.yaml
 ```
 
 apply create ingress for host centralized-auth.local to apisix
 ```shell
-kubectl apply -f centralized-auth/centralized-auth-ingress.yaml
+kubectl apply -f centralized-auth-ingress.yaml
 ```
 
 ## create keycloak
 
 apply create deployment keycloak
 ```shell
-kubectl apply -f centralized-auth/keycloak/keycloak-deployment.yaml
+kubectl apply -f keycloak/keycloak-deployment.yaml
 ```
 
 apply create service keycloak
 ```shell
-kubectl apply -f centralized-auth/keycloak/keycloak-service.yaml
+kubectl apply -f keycloak/keycloak-service.yaml
 ```
 
 check keycloak from apisix container
@@ -27,7 +33,7 @@ kubectl -n apisix exec -it $(kubectl get pods -n apisix -l app.kubernetes.io/nam
 
 add route for keycloak on apisix
 ```shell
-kubectl apply -f centralized-auth/keycloak/keycloak-route.yaml
+kubectl apply -f keycloak/keycloak-route.yaml
 ```
 
 check route keycloak from apisix gateway
@@ -40,12 +46,12 @@ kubectl -n apisix exec -it $(kubectl get pods -n apisix -l app.kubernetes.io/nam
 
 apply create deployment user server
 ```shell
-kubectl apply -f centralized-auth/user-server/user-server-deployment.yaml
+kubectl apply -f user-server/user-server-deployment.yaml
 ```
 
 apply create service user server
 ```shell
-kubectl apply -f centralized-auth/user-server/user-server-service.yaml
+kubectl apply -f user-server/user-server-service.yaml
 ```
 
 check user server from apisix container
@@ -55,7 +61,7 @@ kubectl -n apisix exec -it $(kubectl get pods -n apisix -l app.kubernetes.io/nam
 
 add route for user server on apisix
 ```shell
-kubectl apply -f centralized-auth/user-server/user-server-route.yaml
+kubectl apply -f user-server/user-server-route.yaml
 ```
 
 check route user server from apisix gateway
@@ -69,12 +75,12 @@ kubectl -n apisix exec -it $(kubectl get pods -n apisix -l app.kubernetes.io/nam
 
 apply create deployment payment server
 ```shell
-kubectl apply -f centralized-auth/payment-server/payment-server-deployment.yaml
+kubectl apply -f payment-server/payment-server-deployment.yaml
 ```
 
 apply create service payment server
 ```shell
-kubectl apply -f centralized-auth/payment-server/payment-server-service.yaml
+kubectl apply -f payment-server/payment-server-service.yaml
 ```
 
 check payment server from apisix container
@@ -84,7 +90,7 @@ kubectl -n apisix exec -it $(kubectl get pods -n apisix -l app.kubernetes.io/nam
 
 add route for payment server on apisix
 ```shell
-kubectl apply -f centralized-auth/payment-server/payment-server-route.yaml
+kubectl apply -f payment-server/payment-server-route.yaml
 ```
 
 check route payment server from apisix gateway
